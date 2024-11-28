@@ -4,7 +4,7 @@ from django.db import models
 
 
 class Activity(models.Model):
-    """Модель видов спорта."""
+    """Модель вида активности."""
     name = models.CharField(
         verbose_name='Активность',
         max_length=124,
@@ -38,7 +38,7 @@ class Location(gismodels.Model):
 
 
 class Event(models.Model):
-    """Модель публикаций о мероприятиях."""
+    """Модель мероприятия."""
     name = models.CharField(
         verbose_name='Название мероприятия',
         max_length=124
@@ -76,7 +76,7 @@ class Event(models.Model):
 
 
 class ActivityForEvent(models.Model):
-    """Вспомогательная модель для связи 'вид спорта-мероприятие'."""
+    """Вспомогательная модель для связи 'вид активности - мероприятие'."""
     event = models.ForeignKey(
         Event,
         related_name='activities_for_event',
@@ -102,10 +102,10 @@ class ActivityForEvent(models.Model):
 
 
 class Comment(models.Model):
-    """Модель комментария к отзыву."""
+    """Модель комментария к мероприятию."""
     event = models.ForeignKey(
         Event,
-        verbose_name='Комментарий к посту',
+        verbose_name='Комментарий к мероприятию',
         on_delete=models.CASCADE,
         related_name='comments'
     )

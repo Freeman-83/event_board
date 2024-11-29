@@ -2,6 +2,8 @@ from django.shortcuts import get_object_or_404
 
 from djoser.views import UserViewSet
 
+from drf_spectacular.utils import extend_schema, extend_schema_view
+
 from rest_framework import permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -18,6 +20,15 @@ from events.models import Activity, Event
 from events.serializers import EventSerializer
 
 
+@extend_schema(tags=['Пользователи'])
+@extend_schema_view(
+    list=extend_schema(summary='Получение списка пользователей'),
+    create=extend_schema(summary='Создание пользователя'),
+    retrieve=extend_schema(summary='Пользователь'),
+    update=extend_schema(summary='Изменение пользователя'),
+    partial_update=extend_schema(summary='Частичное изменение пользователя'),
+    destroy=extend_schema(summary='Удаление пользователя'),
+)
 class CustomUserViewSet(UserViewSet):
     """Кастомный вьюсет Пользователя."""
     serializer_class = CustomUserSerializer
@@ -31,6 +42,7 @@ class CustomUserViewSet(UserViewSet):
             self.permission_classes = [IsAdminAuthorOrReadOnly, ]
         return super().get_permissions()
 
+    @extend_schema(summary='Подписка')
     @action(methods=['post', 'delete'],
             detail=True,
             permission_classes=[permissions.IsAuthenticated, ])
@@ -54,6 +66,7 @@ class CustomUserViewSet(UserViewSet):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+    @extend_schema(summary='Все подписки')
     @action(detail=False,
             permission_classes=[permissions.IsAuthenticated, ])
     def subscriptions(self, request):
@@ -67,6 +80,7 @@ class CustomUserViewSet(UserViewSet):
 
         return self.get_paginated_response(serializer.data)
     
+    @extend_schema(summary='Рекомендации')
     @action(methods=['GET'],
             detail=False,
             permission_classes=[permissions.IsAuthenticated, ])
@@ -86,4 +100,3 @@ class CustomUserViewSet(UserViewSet):
         )
 
         return Response(serializer.data)
-

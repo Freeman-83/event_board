@@ -12,7 +12,7 @@ from .serializers import CustomUserSerializer
 
 from .models import CustomUser, Subscribe
 
-from .utils import create_relation, delete_relation
+from utils.crud import create_relation, delete_relation
 
 from .permissions import IsAdminAuthorOrReadOnly
 

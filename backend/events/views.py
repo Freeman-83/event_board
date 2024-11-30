@@ -21,7 +21,7 @@ from .serializers import (ActivitySerializer,
 from .permissions import IsAdminAuthorOrReadOnly
 from .pagination import CustomPaginator
 from .filters import EventFilter, ActivityFilter
-from users.utils import create_relation, delete_relation
+from utils.crud import create_relation, delete_relation
 
 
 @extend_schema(tags=['Активности'])

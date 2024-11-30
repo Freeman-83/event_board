@@ -23,11 +23,11 @@ from events.serializers import EventSerializer
 @extend_schema(tags=['Пользователи'])
 @extend_schema_view(
     list=extend_schema(summary='Получение списка пользователей'),
-    create=extend_schema(summary='Создание пользователя'),
-    retrieve=extend_schema(summary='Пользователь'),
-    update=extend_schema(summary='Изменение пользователя'),
-    partial_update=extend_schema(summary='Частичное изменение пользователя'),
-    destroy=extend_schema(summary='Удаление пользователя'),
+    create=extend_schema(summary='Создание профиля пользователя'),
+    retrieve=extend_schema(summary='Получение профиля пользователя'),
+    update=extend_schema(summary='Изменение профиля пользователя'),
+    partial_update=extend_schema(summary='Частичное изменение профиля пользователя'),
+    destroy=extend_schema(summary='Удаление профиля пользователя'),
 )
 class CustomUserViewSet(UserViewSet):
     """Кастомный вьюсет Пользователя."""

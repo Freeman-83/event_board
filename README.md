@@ -35,7 +35,7 @@ source venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
-Для работы с Postgres необходимо в .env файле создать переменные окружения:
+Для работы с Postgres необходимо создать переменные окружения в .env файле:
 ```
 SECRET_KEY              # секретный ключ Django проекта
 
@@ -44,6 +44,7 @@ POSTGRES_USER           # пользователь
 POSTGRES_PASSWORD       # пароль
 DB_HOST                 # хост
 DB_PORT                 # 5432 (порт по умолчанию)
+```
 
 Выполнить миграции:
 ```
@@ -55,10 +56,17 @@ python3 manage.py migrate
 python3 manage.py runserver
 ```
 
-### После запуска проекта, полная документация для API будет доступна по адресам:
+Для прохождения процедуры регистрации пользователя и получения письма с подтверждением требуется настройка почтового SMTP-сервера в .env файле:
+```
+EMAIL_USE_SSL
+EMAIL_HOST
+EMAIL_HOST_USER
+EMAIL_HOST_PASSWORD
+EMAIL_PORT
+```
+
+После запуска проекта, полная документация для API будет доступна по адресам:
 ```
 http://127.0.0.1:8000/api/schema/redoc/
 http://127.0.0.1:8000/api/schema/swagger-ui/
 ```
-
-*
